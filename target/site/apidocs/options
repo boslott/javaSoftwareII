@@ -1,0 +1,26 @@
+--class-path
+'/Users/boslott/.m2/repository/mysql/mysql-connector-java/8.0.23/mysql-connector-java-8.0.23.jar:/Users/boslott/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-controls/15/javafx-controls-15.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-graphics/15/javafx-graphics-15.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-base/15/javafx-base-15.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-fxml/15/javafx-fxml-15.jar'
+--module-path
+'/Users/boslott/.m2/repository/org/openjfx/javafx-base/15/javafx-base-15-mac.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-controls/15/javafx-controls-15-mac.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-graphics/15/javafx-graphics-15-mac.jar:/Users/boslott/.m2/repository/org/openjfx/javafx-fxml/15/javafx-fxml-15-mac.jar'
+--patch-module
+com.boslott='/Users/boslott/NetBeansProjects/StevenSlott_QAM1_Task1_SchedulingApp/src/main/java'
+-encoding
+'UTF-8'
+-protected
+--module-source-path
+'/Users/boslott/NetBeansProjects/StevenSlott_QAM1_Task1_SchedulingApp/target/site/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/boslott/NetBeansProjects/StevenSlott_QAM1_Task1_SchedulingApp/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'StevenSlott_QAM1_Task1_SchedulingApp 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'StevenSlott_QAM1_Task1_SchedulingApp 1.0-SNAPSHOT API'

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boslott.controller.CustomersUpdateSceneController">
+   <children>
+      <HBox alignment="CENTER" layoutX="25.0" prefHeight="70.0" prefWidth="850.0">
+         <children>
+            <Label prefHeight="59.0" prefWidth="255.0" text="CUSTOMER MODIFICATIONS: ADD, UPDATE, OR DELETE" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="25.0" layoutY="70.0" prefHeight="65.0" prefWidth="850.0">
+         <children>
+            <Label text="CUSTOMER NAME SEARCH">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="customerNameSearchField" onKeyTyped="#filterCustomerChoices" prefHeight="27.0" prefWidth="260.0" promptText=" ... Blank equals ALL Customers ...">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </TextField>
+            <ComboBox fx:id="customerNameSearchComboBox" onAction="#selectThisCustomer" prefHeight="27.0" prefWidth="260.0">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </ComboBox>
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" text="CLEAR">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="25.0" layoutY="135.0" prefHeight="255.0" prefWidth="850.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="850.0">
+                     <children>
+                        <Label text="ID" />
+                        <TextField fx:id="custModIDField" prefHeight="27.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label text="NAME" />
+                        <TextField fx:id="custModNameField" prefHeight="27.0" prefWidth="300.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="850.0">
+                     <children>
+                        <Label text="ADDRESS" />
+                        <TextField fx:id="custModAddressField" prefHeight="27.0" prefWidth="480.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="850.0">
+                     <children>
+                        <Label text="POSTAL CODE" />
+                        <TextField fx:id="custModPostalCodeField" prefHeight="27.0" prefWidth="200.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label text="PHONE" />
+                        <TextField fx:id="custModPhoneField" prefHeight="27.0" prefWidth="200.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="180.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="850.0">
+                     <children>
+                        <Label text="COUNTRY" />
+                        <ComboBox fx:id="custModCountryComboBox" onAction="#selectThisCountry" prefHeight="27.0" prefWidth="190.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Label text="FIRST-LEVEL DIVISION" />
+                        <ComboBox fx:id="custModDivisionComboBox" prefHeight="27.0" prefWidth="190.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="25.0" layoutY="390.0" prefHeight="65.0" prefWidth="850.0">
+         <children>
+            <ButtonBar buttonMinWidth="170.0" prefHeight="65.0" prefWidth="730.0">
+              <buttons>
+                <Button fx:id="createCustomerButton" mnemonicParsing="false" onAction="#createCustomer" text="CREATE NEW" />
+                  <Button fx:id="updateCustomerButton" mnemonicParsing="false" onAction="#updateCustomer" text="UPDATE" />
+                  <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#deleteCustomer" text="DELETE" />
+                  <Button fx:id="cancelCustModButton" mnemonicParsing="false" onAction="#cancel" text="CANCEL" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </HBox>
+      <Label fx:id="errorMessageLabel" layoutX="313.0" layoutY="480.0" text="Label" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

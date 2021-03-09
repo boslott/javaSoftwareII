@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boslott.controller.ReportSceneController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="900.0">
+         <children>
+            <Label text="CHOOSE REPORT:" />
+            <ComboBox fx:id="chooseReportComboBox" onAction="#chooseReport" prefWidth="300.0">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+      </HBox>
+      <VBox layoutY="100.0" prefHeight="400.0" prefWidth="900.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="75.0" minWidth="900.0" prefHeight="75.0" prefWidth="900.0">
+               <children>
+                  <Label fx:id="reportTitleLabel">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" layoutY="75.0" maxHeight="75.0" minHeight="325.0" minWidth="900.0" prefHeight="325.0" prefWidth="900.0">
+               <children>
+                  <ScrollPane fx:id="reportScrollPane" prefHeight="325.0" prefWidth="900.0">
+                     <content>
+                        <VBox fx:id="reportResultsVBox" alignment="TOP_CENTER" prefHeight="325.0" prefWidth="900.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="backToDashboardButton" layoutX="51.0" layoutY="528.0" mnemonicParsing="false" onAction="#goBackToDashboard" text="BACK TO DASHBOARD" />
+   </children>
+</AnchorPane>

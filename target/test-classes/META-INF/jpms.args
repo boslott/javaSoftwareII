@@ -1,0 +1,4 @@
+--patch-module
+com.boslott=_
+--add-reads
+com.boslott=ALL-UNNAMED

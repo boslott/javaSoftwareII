@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" stylesheets="@customerStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boslott.controller.CustomersMainSceneController">
+   <children>
+      <Label layoutX="54.0" layoutY="14.0" text="CUSTOMERS">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <HBox layoutY="43.0" prefHeight="301.0" prefWidth="601.0" />
+      <TableView fx:id="customerTable" layoutX="25.0" layoutY="45.0" minHeight="350.0" minWidth="850.0" prefHeight="350.0" prefWidth="850.0" />
+      <ButtonBar layoutX="180.0" layoutY="395.0" prefHeight="60.0" prefWidth="540.0">
+        <buttons>
+          <Button fx:id="modifyCustomersButton" mnemonicParsing="false" onAction="#modifyCustomers" text="ADD / UPDATE / DELETE CUSTOMERS" />
+            <Button fx:id="backToDashboardButton" mnemonicParsing="false" onAction="#goBackToDashboard" prefHeight="27.0" prefWidth="254.0" text="BACK TO DASHBOARD" />
+        </buttons>
+      </ButtonBar>
+      <Label fx:id="messageLabel" layoutX="203.0" layoutY="484.0" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
