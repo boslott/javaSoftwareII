@@ -28,6 +28,10 @@ To run the program:
 3. Build the project
 4. Run the project
 
+Javadoc - Application Documentation
+- Can be found in the root.src.main.resources.javadocs directory
+- The main documentation file is index.html found in the above directory
+
 
 Custom Report - Customers By Country Division
     This report displays a list of all the divisions within the countries that 

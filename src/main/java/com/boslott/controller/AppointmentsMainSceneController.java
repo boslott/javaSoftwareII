@@ -2,7 +2,10 @@
 package com.boslott.controller;
 
 import com.boslott.DataAccess.UCertdbAppointmentDAO;
+import com.boslott.DataAccess.UCertdbContactDAO;
+import com.boslott.DataAccess.UCertdbCustomerDAO;
 import com.boslott.model.Appointment;
+import com.boslott.model.Customer;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -16,6 +19,8 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -74,6 +79,8 @@ public class AppointmentsMainSceneController implements Initializable {
     @FXML Label messageLabel;
     
     private UCertdbAppointmentDAO appointmentDAO;
+    private UCertdbCustomerDAO customerDAO;
+    private UCertdbContactDAO contactDAO;
     private ArrayList<Appointment> filteredAppointments = new ArrayList<>();
     private static Appointment currentAppointment = null;
 
@@ -86,6 +93,8 @@ public class AppointmentsMainSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             this.appointmentDAO = App.getUCertdbDAOFactory().getAppointmentDAO();
+            this.customerDAO = App.getUCertdbDAOFactory().getCustomerDAO();
+            this.contactDAO = App.getUCertdbDAOFactory().getContactDAO();
             this.updateAppointmentSceneMessage("");
             if(App.getHasMessageForAppointmentScene()) {
                 this.updateAppointmentSceneMessage(App.getMessageForAppointmentScene());
@@ -156,14 +165,15 @@ public class AppointmentsMainSceneController implements Initializable {
      */
     private void populateTable() {
         
-        TableColumn idColumn = new TableColumn<>("ID");
+        TableColumn idColumn = new TableColumn<Customer, String>("ID");
         TableColumn titleColumn = new TableColumn<>("Title");
         TableColumn descriptionColumn = new TableColumn<>("Description");
         TableColumn locationColumn = new TableColumn<>("Location");
         TableColumn typeColumn = new TableColumn<>("Type");
         TableColumn startColumn = new TableColumn<>("Start");
         TableColumn endColumn = new TableColumn<>("End");
-        TableColumn customerIDColumn = new TableColumn<>("Customer ID");
+        TableColumn<Appointment, String> customerNameColumn = new TableColumn<>("Customer Name");
+        TableColumn<Appointment, String> contactNameColumn = new TableColumn<>("Contact Name");
         
         idColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         idColumn.setStyle("-fx-text-alignment: CENTER;");
@@ -236,8 +246,20 @@ public class AppointmentsMainSceneController implements Initializable {
             return cell;
         });
         
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerIDColumn.setStyle("-fx-text-alignment: CENTER;");
+        // Find the Customer, then populate the table with the Customer name
+//        String custName = this.customerDAO.findCustomer();
+        
+//        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        customerNameColumn.setCellValueFactory((cellData) -> {
+            String name = this.customerDAO.findCustomer(cellData.getValue().getCustomerID()).getCustomerName();
+            return new SimpleStringProperty(name);
+        });
+        customerNameColumn.setStyle("-fx-text-alignment: CENTER;");
+        
+        contactNameColumn.setCellValueFactory((cellData) -> {
+            String name = this.contactDAO.findContact(cellData.getValue().getContactID()).getContactName();
+            return new SimpleStringProperty(name);
+        });
         
         this.appointmentsTableView.getColumns().add(idColumn);
         this.appointmentsTableView.getColumns().add(titleColumn);
@@ -246,7 +268,8 @@ public class AppointmentsMainSceneController implements Initializable {
         this.appointmentsTableView.getColumns().add(typeColumn);
         this.appointmentsTableView.getColumns().add(startColumn);
         this.appointmentsTableView.getColumns().add(endColumn);
-        this.appointmentsTableView.getColumns().add(customerIDColumn);
+        this.appointmentsTableView.getColumns().add(customerNameColumn);
+        this.appointmentsTableView.getColumns().add(contactNameColumn);
         
     }
     

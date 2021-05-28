@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.boslott","l":"com.boslott.controller"},{"m":"com.boslott","l":"com.boslott.DataAccess"},{"m":"com.boslott","l":"com.boslott.model"}];updateSearchResults();

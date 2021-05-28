@@ -1,0 +1,4 @@
+module:com.boslott
+com.boslott.controller
+com.boslott.DataAccess
+com.boslott.model

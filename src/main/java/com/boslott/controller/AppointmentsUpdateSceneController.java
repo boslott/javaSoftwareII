@@ -332,13 +332,14 @@ public class AppointmentsUpdateSceneController implements Initializable {
         Boolean existsToDelete = apptIDToDelete != -1;
         
         if(existsToDelete) {
+            String apptToDeleteType = AppointmentsMainSceneController.getCurrentAppointment().getType();
             Boolean successfulDeletion = this.apptDAO.deleteAppointment(apptIDToDelete);
             
             if(successfulDeletion) {
                 this.setErrorMessage("");
                 this.clear();
                 App.setHasMessageForAppointmentScene(true);
-                App.setMessageForAppointmentScene("Appointment With ID: " + apptIDToDelete + " has been deleted");
+                App.setMessageForAppointmentScene("Appointment With ID: " + apptIDToDelete + " and Type: " + apptToDeleteType + " has been deleted");
                 SceneMediator.changeScene("AppointmentsMainScene");
             }
             
@@ -672,7 +673,7 @@ public class AppointmentsUpdateSceneController implements Initializable {
         if(type.equals("start")) {
             if(this.startDatePicker.getValue() != null) {
                 if(this.startTimeComboBox.getValue() != null) {
-                    // Create a Timestamp of the local time chosen, but converted to EST
+                    // Create a Timestamp of the local time chosen, but converted to UTC
                     timeChoiceTimeStamp = this.createTimestampFromInputs(this.startTimeComboBox, this.startDatePicker, "UTC");
                 } else {
                     return false;
@@ -684,7 +685,7 @@ public class AppointmentsUpdateSceneController implements Initializable {
         else if(type.equals("end")) {
             if(this.endDatePicker.getValue() != null) {
                 if(this.endTimeComboBox.getValue() != null) {
-                    // Create a Timestamp of the local time chosen, but converted to EST
+                    // Create a Timestamp of the local time chosen, but converted to UTC
                     timeChoiceTimeStamp = this.createTimestampFromInputs(this.endTimeComboBox, this.endDatePicker, "UTC");
                 } else {
                     return false;
@@ -700,21 +701,31 @@ public class AppointmentsUpdateSceneController implements Initializable {
         
         // Check that Timestamp is within Company business hours
         int chosenHourOfDay = LocalDateTime.ofInstant(timeChoiceTimeStamp.toInstant(), ZoneId.systemDefault()).getHour();
+        int chosenMinOfDay = LocalDateTime.ofInstant(timeChoiceTimeStamp.toInstant(), ZoneId.systemDefault()).getMinute();
         
-        // Timestamps are UTC times, so EST business hours are 0-3 || 13-24 UTC
-        // 3 <= X <= 8 ... Too late, after hours
-        // 8 < X < 13 ... To early, before hours
+        // Timestamps are UTC times, so EST business hours are 0-3 || 12-24 UTC
+        // 3 < X =< 8 ... Too late, after hours
+        // 8 <= X < 12 ... To early, before hours
+        
+        System.out.println("The chosenHourOfDayzzz == " + chosenHourOfDay);
+        System.out.println("The chosenMinOfDay == " + chosenMinOfDay);
         
         
-        if(8 < chosenHourOfDay && chosenHourOfDay < 13) {
-            // Too early, business is not open yet
-            this.setErrorMessage(
-                "The chosen " + (type.equals("start") ? "START" : "END")
-                    + " time is before company hours: 8am - 10pm EST\nPlease make another selection"
-            );
-            return false;
+        if(8 <= chosenHourOfDay && chosenHourOfDay < 12) {
+            if(chosenMinOfDay > 0) {
+                // Too early, business is not open yet
+                this.setErrorMessage(
+                    "The chosen " + (type.equals("start") ? "START" : "END")
+                        + " time is before company hours: 8am - 10pm EST\nPlease make another selection"
+                );
+                return false;
+            } else {
+                // This is the end of the hour
+                return true;
+            }
             
-        } else if(3 <= chosenHourOfDay && chosenHourOfDay <= 8) {
+            
+        } else if(2 < chosenHourOfDay && chosenHourOfDay <= 8) {
             System.out.println("The chosen time is after 10pm");
             this.setErrorMessage(
                 "The chosen " + (type.equals("start") ? "START" : "END")
@@ -723,10 +734,16 @@ public class AppointmentsUpdateSceneController implements Initializable {
             return false;
             
         } else {
+            if(chosenHourOfDay == 2 && chosenMinOfDay > 0) {
+                System.out.println("The choen time is after 10pm by minutes");
+                this.setErrorMessage("The chosen " + (type.equals("start") ? "START" : "END") + " time is after company hours: 8am - 10pnm EST\nPlease make another selection");
+                return false;
+            }
             // chosenHour is within business hours 
             this.clearErrorMessage();
             return true;
         }
+        
     }
     
     /**
